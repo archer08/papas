@@ -1,0 +1,23 @@
+{
+  "name": "ppas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
+    "express-validator": "^6.13.0",
+    "graphql-yoga": "^1.16.7",
+    "mongoose": "^6.0.10",
+    "twilio": "^3.69.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
