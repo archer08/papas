@@ -4,6 +4,6 @@ const {
   twilloPtpConnectionRequestController,
 } = require("../config/twilloConfig.js");
 
-router.route("/").post(twilloPtpConnectionRequestController);
+router.route("/").get(twilloPtpConnectionRequestController);
 
 module.exports = router;
