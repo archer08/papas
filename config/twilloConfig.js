@@ -30,6 +30,7 @@ const StartPtpConnection = async (
 
 exports.twilloPtpConnectionRequestController = (req, res, next) => {
   console.log(req.body);
+  res.json();
 };
 const PtpConnectionChecker = async (number) => {
   const data = await PtpModel.find({ hostNumber: number, status: "Active" });
