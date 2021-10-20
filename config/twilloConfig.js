@@ -35,12 +35,13 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   //   const To = msg[0];
   //   const message = msg[1];
   // }
-  client.messages.create({
-    body: `InComming Message From: ${res.query.From}\n
-    ${res.query.Body}`,
-    from: "+14124304517",
-    to: "+19143866407",
-  });
+  console.log(req);
+  // client.messages.create({
+  //   body: `InComming Message From: ${res.query.From}\n
+  //   ${res.query.Body}`,
+  //   from: "+14124304517",
+  //   to: "+19143866407",
+  // });
   res.end();
 };
 const PtpConnectionChecker = async (number) => {
