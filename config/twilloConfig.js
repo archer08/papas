@@ -29,7 +29,7 @@ const StartPtpConnection = async (
 };
 
 exports.twilloPtpConnectionRequestController = (req, res, next) => {
-  console.log(req.Body);
+  console.log(req.body);
   // client.messages.create({
   //   body: res.body.Body,
   //   from: "+14124304517",
