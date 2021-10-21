@@ -83,10 +83,14 @@ const commandDirectory = (cmd) => {
   }
 };
 
-exports.sendMessage = async (message, from, to) => {
-  client.messages
-    .create({ body: message, from, to })
-    .then((message) => console.log(message.sid));
+exports.sendMessage = async (msg, from, to) => {
+  try {
+    client.messages
+      .create({ body: `${msg}`, from, to })
+      .then((message) => console.log(message.sid));
+  } catch (err) {
+    console.log(err);
+  }
 };
 const proccessMsg = () => {
   msg = req.body.Body;
