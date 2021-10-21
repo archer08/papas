@@ -46,11 +46,14 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   // console.log(req.query.From);
   // const twiml = new MessagingResponse();
   // twiml.message('The Robots are coming! Head for the hills!');
-  sendMessage(
-    `Message From: ${req.query.From}\n ${req.query.Body}`,
-    "+14124304517",
-    "+19143866407"
-  );
+  client.messages
+    .create({
+      body: `Message From: ${req.query.From}\n ${req.query.Body}`,
+      from: "+14124304517",
+      to: "+19143866407",
+    })
+    .then((message) => console.log(message.sid));
+
   res.end();
 };
 const PtpConnectionChecker = async (number) => {
