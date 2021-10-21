@@ -20,6 +20,11 @@ const StartPtpConnection = async (
       connectionTime,
       status: "Pending",
     });
+    this.sendMessage(
+      `Connection started with ${recieverNumber}`,
+      HostNumber,
+      recieverNumber
+    );
   }
 };
 
@@ -31,11 +36,12 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   //   const message = msg[1];
   // }
   // console.log(req.query.From);
-
+  // const twiml = new MessagingResponse();
+  // twiml.message('The Robots are coming! Head for the hills!');
   this.sendMessage(
-    `Connection started with ${recieverNumber}`,
-    HostNumber,
-    recieverNumber
+    `Message From: ${req.query.From}\n ${req.query.Body}`,
+    "+14124304517",
+    "+19143866407"
   );
   res.end();
 };
