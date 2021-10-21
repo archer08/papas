@@ -20,11 +20,6 @@ const StartPtpConnection = async (
       connectionTime,
       status: "Pending",
     });
-    this.sendMessage(
-      `Connection started with ${recieverNumber}`,
-      HostNumber,
-      recieverNumber
-    );
   }
 };
 
@@ -36,13 +31,12 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   //   const message = msg[1];
   // }
   // console.log(req.query.From);
-  
-  client.messages.create({
-    body: `InComming Message From: ${req.query.From}\n
-    ${req.query.Body}`,
-    from: "+14124304517",
-    to: "+19143866407",
-  });
+
+  this.sendMessage(
+    `Connection started with ${recieverNumber}`,
+    HostNumber,
+    recieverNumber
+  );
   res.end();
 };
 const PtpConnectionChecker = async (number) => {
