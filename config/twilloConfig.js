@@ -35,7 +35,7 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   //   const To = msg[0];
   //   const message = msg[1];
   // }
-  console.log(req.query);
+  console.log(req.query.From);
   // client.messages.create({
   //   body: `InComming Message From: ${res.query.From}\n
   //   ${res.query.Body}`,
