@@ -27,7 +27,15 @@ const StartPtpConnection = async (
     );
   }
 };
-
+exports.sendMessage = async (msg, from, to) => {
+  try {
+    client.messages
+      .create({ body: `${msg}`, from, to })
+      .then((message) => console.log(message.sid));
+  } catch (err) {
+    console.log(err);
+  }
+};
 exports.twilloPtpConnectionRequestController = (req, res, next) => {
   // if (req.query.From === "+19243866407") {
   //   const msg = req.query.Body;
