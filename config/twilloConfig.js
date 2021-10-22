@@ -50,7 +50,7 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
     .create({
       body: `Message From: ${req.query.From}\n ${req.query.Body}`,
       from: "+14124304517",
-      to: "+19143866407",
+      to: "+19145136325",
     })
     .then((message) => console.log(message.sid));
 
