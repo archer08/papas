@@ -15,24 +15,25 @@ exports.sortMessages = async (array) => {
   return sortedDates;
 };
 exports.checkMessage = async (msg, num) => {
-  const command = msg.split(":")[0];
-  const message = msg.split(":")[1];
+  console.log(msg);
+  //   const command = msg.split(":")[0];
+  //   const message = msg.split(":")[1];
 
-  switch (command) {
-    case "ws":
-      const stock = await StockModel.findOne({ name: message });
-      return stock.stock;
-    case "s+":
-      stock = await StockModel.findOne({ name: message });
-      stock.stock = stock.stock + num;
-      await stock.save();
-      return stock.stock;
-    case "s-":
-      stock = await StockModel.findOne({ name: message });
-      stock.stock = stock.stock - num;
-      await stock.save();
-      return stock.stock;
-    case "m":
-      return `this is your message: ${msg}`;
-  }
+  //   switch (command) {
+  //     case "ws":
+  //       const stock = await StockModel.findOne({ name: message });
+  //       return stock.stock;
+  //     case "s+":
+  //       stock = await StockModel.findOne({ name: message });
+  //       stock.stock = stock.stock + num;
+  //       await stock.save();
+  //       return stock.stock;
+  //     case "s-":
+  //       stock = await StockModel.findOne({ name: message });
+  //       stock.stock = stock.stock - num;
+  //       await stock.save();
+  //       return stock.stock;
+  //     case "m":
+  //       return `this is your message: ${msg}`;
+  //   }
 };
