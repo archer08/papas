@@ -23,12 +23,12 @@ exports.checkMessage = async (msg, num) => {
       const stock = await StockModel.findOne({ name: message });
       return stock.stock;
     case "s+":
-      const stock = await StockModel.findOne({ name: message });
+      stock = await StockModel.findOne({ name: message });
       stock.stock = stock.stock + num;
       await stock.save();
       return stock.stock;
     case "s-":
-      const stock = await StockModel.findOne({ name: message });
+      stock = await StockModel.findOne({ name: message });
       stock.stock = stock.stock - num;
       await stock.save();
       return stock.stock;
