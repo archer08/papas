@@ -37,14 +37,14 @@ const sendMessage = async (msg, from, to) => {
     console.log(err);
   }
 };
-exports.twilloPtpConnectionRequestController = (req, res, next) => {
+exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const twiml = new MessagingResponse();
   const msg = req.query.Body;
   const sender = req.query.from;
   const reciever = req.query.To;
   saveMessage(msg, sender, reciever);
   // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
-  const check = checkMessage(msg);
+  const check = await checkMessage(msg);
   console.log(`check: ${check}`);
 
   twiml.message(check);
