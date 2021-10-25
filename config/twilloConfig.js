@@ -45,6 +45,7 @@ exports.twilloPtpConnectionRequestController = (req, res, next) => {
   saveMessage(msg, sender, reciever);
   // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
   const check = checkMessage(msg);
+  console.log(`check: ${check}`);
 
   twiml.message(check);
 
