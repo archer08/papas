@@ -4,6 +4,6 @@ const client = require("twilio")(accountSid, authToken);
 
 exports.NotifyOwner = (msg) => {
   client.messages
-    .create({ body: msg, from: "+15017122661", to: process.env.OWNNUMBER })
+    .create({ body: msg, from: "+19143866407", to: process.env.OWNNUMBER })
     .then((message) => console.log(message.sid));
 };

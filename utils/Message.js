@@ -1,3 +1,4 @@
+const { StartPtpConnection } = require("../config/twilloConfig.js");
 const Message = require("../models/MessageModel.js");
 const StockModel = require("../models/StockModel.js");
 
@@ -14,12 +15,13 @@ exports.sortMessages = async (array) => {
   const sortedDates = array.sort((dateA, dateB) => dateA.date - dateB.date);
   return sortedDates;
 };
-exports.checkMessage = async (msg, num) => {
+exports.checkMessage = async (msg, num, vars) => {
   console.log(msg);
   const command = msg.split(":")[0];
   console.log(command);
   const message = msg.split(":")[1];
   console.log(message);
+  const { HostNumber, recieverNumber, connectionTime } = vars;
 
   switch (command) {
     case "ws":
@@ -36,6 +38,7 @@ exports.checkMessage = async (msg, num) => {
       await stock.save();
       return stock.stock;
     case "m":
-      return `this is your message: ${msg}`;
+      StartPtpConnection(HostNumber, recieverNumber);
+      return `Connection started with: ${recieverNumber}`;
   }
 };

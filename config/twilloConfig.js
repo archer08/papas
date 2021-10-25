@@ -6,27 +6,24 @@ const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const MessageModel = require("../models/MessageModel.js");
 const { saveMessage, checkMessage } = require("../utils/Message.js");
 
-const StartPtpConnection = async (
+exports.StartPtpConnection = async (
   HostNumber,
   recieverNumber,
   connectionTime
 ) => {
-  const check = await PtpCModel.find({ hostNumber, status: "live" });
-  if (!check.length <= 0) {
-    return "ptpConnection alreadty establshed please end connection.";
-  } else {
-    const connection = await PtpCModel.create({
-      hostNumber,
-      recieverNumber,
-      connectionTime,
-      status: "Pending",
-    });
-    this.sendMessage(
-      `Connection started with ${recieverNumber}`,
-      HostNumber,
-      recieverNumber
-    );
-  }
+  try {
+    const check = await PtpCModel.find({ hostNumber, status: "live" });
+    if (!check.length <= 0) {
+      return "ptpConnection alreadty establshed please end connection.";
+    } else {
+      const connection = await PtpCModel.create({
+        hostNumber,
+        recieverNumber,
+        connectionTime,
+        status: "Pending",
+      });
+    }
+  } catch (err) {}
 };
 const sendMessage = async (msg, from, to) => {
   try {
@@ -43,8 +40,9 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const sender = req.query.from;
   const reciever = req.query.To;
   saveMessage(msg, sender, reciever);
+  const vars = { HostNumber: sender, recieverNumber: reciever };
   // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
-  const check = await checkMessage(msg);
+  const check = await checkMessage(msg, vars);
   console.log(`check: ${check}`);
 
   twiml.message(check);
