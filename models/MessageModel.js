@@ -4,6 +4,8 @@ const MessageSchema = new Schema({
   // connectionId: { type: String, required: true },
   sender: { type: String, required: true },
   message: { type: String, required: true },
+  timeSent: { type: String, required: true },
+  coversation: { type: String, required: true },
 });
 const MessageModel = model("Message", MessageSchema);
 

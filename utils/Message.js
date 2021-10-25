@@ -17,7 +17,9 @@ exports.sortMessages = async (array) => {
 exports.checkMessage = async (msg, num) => {
   console.log(msg);
   const command = msg.split(":")[0];
+  console.log(command);
   const message = msg.split(":")[1];
+  console.log(message);
 
   switch (command) {
     case "ws":
