@@ -43,24 +43,25 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
     From: sender,
   } = req.query;
 
-  saveMessage(msg, sender, reciever, status);
-  if (PtpConnectionChecker(sender)) {
-    twiml.message("Connection already estableshed");
-    // saveMessage("Connection already estableshed", reciever, );
-  }
-  const vars = { HostNumber: sender, recieverNumber: reciever };
-  // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
-  const check = await checkMessage(msg, vars);
-  console.log(`check: ${check}`);
+  // saveMessage(msg, sender, reciever, status);
+  // if (PtpConnectionChecker(sender)) {
+  //   twiml.message("Connection already estableshed");
+  //   // saveMessage("Connection already estableshed", reciever, );
+  // }
+  // const vars = { HostNumber: sender, recieverNumber: reciever };
+  // // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
+  // const check = await checkMessage(msg, vars);
+  // console.log(`check: ${check}`);
 
-  twiml.message(check);
+  // twiml.message(check);
+  requestMessage("hello man");
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 };
 
 const PtpConnectionChecker = async (number) => {
-  const data = await PtpModel.find({ hostNumber: number, status: "Active" });
+  const data = await PtpCModel.find({ hostNumber: number, status: "Active" });
   const check = data.length <= 0;
   if (check) {
     return false;
