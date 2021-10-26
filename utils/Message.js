@@ -21,7 +21,7 @@ exports.checkMessage = async (msg, num, vars) => {
   console.log(command);
   const message = msg.split(":")[1];
   console.log(message);
-  const { HostNumber, recieverNumber, connectionTime } = vars;
+  const { HostNumber, connectionTime } = vars;
 
   switch (command) {
     case "ws":
@@ -38,6 +38,7 @@ exports.checkMessage = async (msg, num, vars) => {
       await stock.save();
       return stock.stock;
     case "m":
+      const recieverNumber = message;
       StartPtpConnection(HostNumber, recieverNumber);
       return `Connection started with: ${recieverNumber}`;
   }

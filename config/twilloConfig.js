@@ -36,10 +36,18 @@ const sendMessage = async (msg, from, to) => {
 };
 exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const twiml = new MessagingResponse();
-  const msg = req.query.Body;
-  const sender = req.query.from;
-  const reciever = req.query.To;
-  saveMessage(msg, sender, reciever);
+  const {
+    SmsStatus: status,
+    Body: msg,
+    To: reciever,
+    From: sender,
+  } = req.query;
+
+  saveMessage(msg, sender, reciever, status);
+  if (PtpConnectionChecker(sender)) {
+    twiml.message("Connection already estableshed");
+    // saveMessage("Connection already estableshed", reciever, );
+  }
   const vars = { HostNumber: sender, recieverNumber: reciever };
   // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
   const check = await checkMessage(msg, vars);
@@ -50,21 +58,20 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 };
+
 const PtpConnectionChecker = async (number) => {
   const data = await PtpModel.find({ hostNumber: number, status: "Active" });
-  const data2 = await PtpModel.find({
-    receiverNumber: number,
-    status: "Active",
-  });
   const check = data.length <= 0;
-  const check2 = data2.length <= 0;
-  if (!check) {
-    return data;
+  if (check) {
+    return false;
+  } else {
+    return true;
   }
-  if (!check2) {
-    return data2;
-  }
-  return false;
+};
+
+const requestMessage = (msg) => {
+  const twiml = new MessagingResponse();
+  twiml.message(msg);
 };
 
 const PtpActiveConnectionHandler = async (message, sender) => {
@@ -76,42 +83,4 @@ const PtpActiveConnectionHandler = async (message, sender) => {
       connection: check.id,
     });
   }
-};
-
-const commandDirectory = (cmd) => {
-  switch (cmd) {
-    case "ptp":
-      return;
-
-    default:
-      break;
-  }
-};
-
-exports.sendMessage = async (msg, from, to) => {
-  try {
-    client.messages
-      .create({ body: `${msg}`, from, to })
-      .then((message) => console.log(message.sid));
-  } catch (err) {
-    console.log(err);
-  }
-};
-const proccessMsg = () => {
-  msg = req.body.Body;
-  if (msg.contains(":")) {
-    const splitMsg = msg.split(":");
-    if (splitMsg[0] in commandDirectory) {
-    }
-  }
-};
-
-exports.TwiloMsgRoute = (req, res) => {
-  const twiml = new MessagingResponse();
-  let msg = request.body.Body;
-
-  twiml.message("The Robots are coming! Head for the hills!");
-
-  res.writeHead(200, { "Content-Type": "text/xml" });
-  res.end(twiml.toString());
 };
