@@ -8,23 +8,7 @@ const vonage = new Vonage({
   apiKey: "5a170902",
   apiSecret: "Lfj8ib3oGIVR7Uts",
 });
-const from = "18773315585";
-const to = "19143866407";
-const text = "A text message sent using the Vonage SMS API";
 
-vonage.message.sendSms(from, to, text, (err, responseData) => {
-  if (err) {
-    console.log(err);
-  } else {
-    if (responseData.messages[0]["status"] === "0") {
-      console.log("Message sent successfully.");
-    } else {
-      console.log(
-        `Message failed with error: ${responseData.messages[0]["error-text"]}`
-      );
-    }
-  }
-});
 exports.SendSms = async (from, to, text) => {
   try {
     vonage.message.sendSms(from, to, text, (err, responseData) => {
