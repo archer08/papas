@@ -30,7 +30,7 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   //   To: Worker,
   //   From: sender,
   // } = req.query;
-  console.log(req.body);
+  console.log(req.query);
 
   res.sendStatus(204);
 };
