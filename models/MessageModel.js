@@ -12,7 +12,7 @@ const MessageSchema = new Schema({
     timeSeen: { type: Date },
     messageType: { type: String, required: true },
     rtm: { type: String },
-    platform: { sent: { type: Sting }, recieved: { type: String } },
+    platform: { sent: { type: String }, recieved: { type: String } },
     api: { type: Boolean, required: true },
     encrypted: { type: Boolean, required: true, default: false },
     status: { type: String, required: true },
