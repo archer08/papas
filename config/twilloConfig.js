@@ -10,13 +10,12 @@ const { MessageHandler, SendSms } = require("../functions/Sms");
 exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const session = req.session;
   const conversation = session.conversation;
-  if (!conversation) {
-    if (!session.numberRequested) {
-      twiml.message("Who will you like to message");
-      session.numberRequested = true;
-    }
-  }
-  SendSms("18773315585", "19143866407", "hello this is a test");
+  // if (!conversation) {
+  //   if (!session.numberRequested) {
+  //     session.numberRequested = true;
+  //   }
+  // }
+  SendSms("18773315585", "19143866407", "Who will you like to message");
 
   // gather all data from from request
   const {
