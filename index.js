@@ -11,7 +11,8 @@ const sessions = require("express-session");
 const colors = require("colors");
 const twilloRoutes = require("./routes/twilloRoutes.js");
 const userRoute = require("./routes/userRoutes.js");
-
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(cookieParser());
