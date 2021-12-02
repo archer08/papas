@@ -5,20 +5,18 @@ const PtpCModel = require("../models/PtpCModel.js");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const MessageModel = require("../models/MessageModel.js");
 const { saveMessage, checkMessage } = require("../utils/Message.js");
-const { MessageHandler } = require("../functions/Sms");
+const { MessageHandler, SendSms } = require("../functions/Sms");
 
 exports.twilloPtpConnectionRequestController = async (req, res, next) => {
-  const twiml = new MessagingResponse();
-
-  // const session = req.session;
-  // const currentConversation = session.currentConversation;
+  const session = req.session;
+  const currentConversation = session.currentConversation;
   // if (!currentConversation) {
   //   if (!session.numberRequested) {
   //     twiml.message("Who will you like to message");
   //     session.numberRequested = true;
   //   }
   // }
-  twiml.message("Who will you like to message");
+  SendSms("18773315585", "19143866407", "hello this is a test");
 
   // gather all data from from request
   const {

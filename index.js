@@ -11,43 +11,20 @@ const sessions = require("express-session");
 const colors = require("colors");
 const twilloRoutes = require("./routes/twilloRoutes.js");
 const userRoute = require("./routes/userRoutes.js");
-const Vonage = require("@vonage/server-sdk");
-
-const vonage = new Vonage({
-  apiKey: "5a170902",
-  apiSecret: "Lfj8ib3oGIVR7Uts",
-});
-const from = "18773315585";
-const to = "19143866407";
-const text = "A text message sent using the Vonage SMS API";
-
-vonage.message.sendSms(from, to, text, (err, responseData) => {
-  if (err) {
-    console.log(err);
-  } else {
-    if (responseData.messages[0]["status"] === "0") {
-      console.log("Message sent successfully.");
-    } else {
-      console.log(
-        `Message failed with error: ${responseData.messages[0]["error-text"]}`
-      );
-    }
-  }
-});
 
 // creating 24 hours from milliseconds
-// const oneDay = 1000 * 60 * 60 * 24;
-// app.use(cookieParser());
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(cookieParser());
 
-//session middleware
-// app.use(
-//   sessions({
-//     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-//     saveUninitialized: true,
-//     cookie: { maxAge: oneDay },
-//     resave: false,
-//   })
-// );
+// session middleware
+app.use(
+  sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized: true,
+    cookie: { maxAge: oneDay },
+    resave: false,
+  })
+);
 
 app.use(express.json());
 app.use("/api/users", userRoute);
