@@ -13,18 +13,18 @@ const twilloRoutes = require("./routes/twilloRoutes.js");
 const userRoute = require("./routes/userRoutes.js");
 
 // creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
-app.use(cookieParser());
+// const oneDay = 1000 * 60 * 60 * 24;
+// app.use(cookieParser());
 
 //session middleware
-app.use(
-  sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
-    resave: false,
-  })
-);
+// app.use(
+//   sessions({
+//     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//     saveUninitialized: true,
+//     cookie: { maxAge: oneDay },
+//     resave: false,
+//   })
+// );
 
 app.use(express.json());
 app.use("/api/users", userRoute);
