@@ -55,8 +55,6 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   } = req.query;
   setTimeout(() => {}, 60000);
 
-  MessageHandler(sender, worker, message);
-
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 };
