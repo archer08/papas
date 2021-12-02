@@ -28,8 +28,3 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
 
   res.status(204);
 };
-
-const requestMessage = (msg) => {
-  const twiml = new MessagingResponse();
-  twiml.message(msg);
-};
