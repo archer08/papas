@@ -5,7 +5,7 @@ const PtpCModel = require("../models/PtpCModel.js");
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const MessageModel = require("../models/MessageModel.js");
 const { saveMessage, checkMessage } = require("../utils/Message.js");
-
+const { MessageHandler } = require("../functions/Sms");
 exports.StartPtpConnection = async (
   HostNumber,
   recieverNumber,
@@ -36,52 +36,32 @@ const sendMessage = async (msg, from, to) => {
 };
 exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const twiml = new MessagingResponse();
+
+  const session = req.session;
+  const currentConversation = session.currentConversation;
+  if (!currentConversation) {
+    if (!session.numberRequested) {
+      twiml.message("Who will you like to message");
+      session.numberRequested = true;
+    }
+  }
+
+  // gather all data from from request
   const {
     SmsStatus: status,
-    Body: msg,
-    To: reciever,
+    Body: message,
+    To: Worker,
     From: sender,
   } = req.query;
+  setTimeout(() => {}, 60000);
 
-  // saveMessage(msg, sender, reciever, status);
-  // if (PtpConnectionChecker(sender)) {
-  //   twiml.message("Connection already estableshed");
-  //   // saveMessage("Connection already estableshed", reciever, );
-  // }
-  // const vars = { HostNumber: sender, recieverNumber: reciever };
-  // // const sortedDates = arrayOfDates.sort((dateA, dateB) => dateA.date - dateB.date)
-  // const check = await checkMessage(msg, vars);
-  // console.log(`check: ${check}`);
-
-  // twiml.message(check);
-  requestMessage("hello man");
+  MessageHandler(sender, worker, message);
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 };
 
-const PtpConnectionChecker = async (number) => {
-  const data = await PtpCModel.find({ hostNumber: number, status: "Active" });
-  const check = data.length <= 0;
-  if (check) {
-    return false;
-  } else {
-    return true;
-  }
-};
-
 const requestMessage = (msg) => {
   const twiml = new MessagingResponse();
   twiml.message(msg);
-};
-
-const PtpActiveConnectionHandler = async (message, sender) => {
-  const check = PtpConnectionChecker(sender);
-  if (sender !== false) {
-    const message = await MessageModel.create({
-      message,
-      sender,
-      connection: check.id,
-    });
-  }
 };
