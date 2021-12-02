@@ -18,7 +18,7 @@ const vonage = new Vonage({
   apiSecret: "Lfj8ib3oGIVR7Uts",
 });
 const from = "18773315585";
-const to = "19145136325";
+const to = "19143866407";
 const text = "A text message sent using the Vonage SMS API";
 
 vonage.message.sendSms(from, to, text, (err, responseData) => {
