@@ -11,10 +11,13 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const session = req.session;
   const conversation = session.conversation;
   if (!conversation) {
-    if (!session.numberRequested) {
+    if (session.numberRequested === false) {
       SendSms("18773315585", "19143866407", "Who will you like to message");
       session.numberRequested = true;
+    } else {
+      SendSms("18773315585", "19143866407", "Please provide a number");
     }
+    console.log(req.body);
   }
 
   // gather all data from from request
