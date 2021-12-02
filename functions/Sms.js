@@ -31,13 +31,13 @@ exports.CreateConversationHandler = async (
   const save = await ConversationModel.create(conversation);
 };
 //2. create message object
-exports.CreateMessageObjectHandler = (...data) => {};
+exports.CreateMessageObjectHandler = async (...data) => {};
 //3. encrypt message
-exports.EncryptionHandler = (text) => {
+exports.EncryptionHandler = async (text) => {
   return encrypt(text);
 };
 //4. log message
-exports.LogMessageHandler = (messageData) => {
+exports.LogMessageHandler = async (messageData) => {
   const { sender, reciever, message, data } = messageData;
   try {
     await MessageModel.create({ message, sender, reciever, data });
