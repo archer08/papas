@@ -10,12 +10,12 @@ const { MessageHandler, SendSms } = require("../functions/Sms");
 exports.twilloPtpConnectionRequestController = async (req, res, next) => {
   const session = req.session;
   const conversation = session.conversation;
-  // if (!conversation) {
-  //   if (!session.numberRequested) {
-  //     session.numberRequested = true;
-  //   }
-  // }
-  SendSms("18773315585", "19143866407", "Who will you like to message");
+  if (!conversation) {
+    if (!session.numberRequested) {
+      SendSms("18773315585", "19143866407", "Who will you like to message");
+      session.numberRequested = true;
+    }
+  }
 
   // gather all data from from request
   const {
@@ -25,5 +25,5 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
     From: sender,
   } = req.query;
 
-  res.status(204);
+  res.sendStatus(204);
 };
