@@ -26,7 +26,7 @@ exports.twilloPtpConnectionRequestController = async (req, res, next) => {
     From: sender,
   } = req.query;
 
-  res.send("ok");
+  res.sendStatus(204);
 };
 
 const requestMessage = (msg) => {
