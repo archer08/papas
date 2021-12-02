@@ -10,7 +10,7 @@ const {
   SendSms,
   CreateConversationHandler,
 } = require("../functions/Sms");
-import validator from "validator";
+const validator = require("validator");
 const addMessage = (session) => {
   session.conversation.messages.concat(message);
 };
